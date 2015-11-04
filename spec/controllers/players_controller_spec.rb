@@ -13,7 +13,10 @@ RSpec.describe PlayersController, type: :controller do
       player.point = 0
       player.lands = [land1]
       player.currentPosition = land1
-      controller.player = player
+
+      game = Game.new
+      game.stub(:get_player).with(1).and_return player
+      controller.game = game
 
       get :show, id: 1
       expect(response).to have_http_status(:success)
@@ -26,6 +29,10 @@ RSpec.describe PlayersController, type: :controller do
     end
 
     it "should get 404 if play not exists" do
+      game = Game.new
+      game.stub(:get_player).with(1).and_return nil
+      controller.game = game
+
       get :show, id: 1, format: :json
       expect(response).to have_http_status(404)
     end

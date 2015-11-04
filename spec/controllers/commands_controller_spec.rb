@@ -12,7 +12,9 @@ RSpec.describe CommandsController, type: :controller do
         [command1]
       end
 
-      controller.player = player
+      game = Game.new
+      game.stub(:get_player).with(1).and_return player
+      controller.game = game
 
       get :index, player_id: 1, format: :json
       expect(response).to have_http_status(:success)
@@ -23,6 +25,10 @@ RSpec.describe CommandsController, type: :controller do
     end
 
     it "return 404 is player not found" do
+      game = Game.new
+      game.stub(:get_player).with(1).and_return nil
+      controller.game = game
+
       get :index, player_id: 1, format: :json
       expect(response).to have_http_status(404)
     end

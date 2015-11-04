@@ -1,7 +1,6 @@
 class PlayersController < ApplicationController
-  attr_accessor :player
-
   def show
+    @player = game.get_player(params[:id].to_i)
     if @player.nil?
       head :not_found
     else

@@ -1,7 +1,6 @@
 class CommandsController < ApplicationController
-  attr_accessor :player
-
   def index
+    player = game.get_player(params[:player_id].to_i)
     if player.nil?
       head :not_found
       return
