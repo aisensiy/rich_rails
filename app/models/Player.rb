@@ -4,4 +4,12 @@ class Player
   def commands
 
   end
+
+  def get_command_by_name(command_name)
+
+  end
+
+  def execute(command)
+
+  end
 end

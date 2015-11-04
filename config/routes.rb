@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :lands, only: [:index]
     resources :players, only: [:show] do
       resources :commands, only: [:index] do
-        post 'execute', on: :member
+        post 'executed', on: :member
       end
     end
   end
