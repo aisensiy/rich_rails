@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  # get 'game/lands' => 'lands#index'
+  # get 'game/players/:id' => 'players#view'
+  # get 'game/players/:id/commands' => 'commands#index'
+  # post 'game/players/:id/commands/:command' => 'commands#execute'
+  #
+
+  resource :game, only: [] do
+    resources :lands, only: [:index]
+    resources :players, only: [:show] do
+      resources :commands, only: [:index] do
+        post 'execute', on: :member
+      end
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
