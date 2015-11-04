@@ -21,6 +21,11 @@ RSpec.describe CommandsController, type: :controller do
       expect(json.size).to eq(1)
       expect(json[0]['name']).to eq("roll")
     end
+
+    it "return 404 is player not found" do
+      get :index, player_id: 1, format: :json
+      expect(response).to have_http_status(404)
+    end
   end
 
 end
